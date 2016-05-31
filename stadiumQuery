@@ -1,0 +1,10 @@
+select ?stadium ?stadiumLabel ?location ?capacity ?image ?commune ?communeLabel ?communeImage where {
+	wd:Q189571 wdt:P276 ?stadium .
+  	?stadium wdt:P625 ?location .
+  	?stadium wdt:P1083 ?capacity .
+  	?stadium wdt:P18 ?image .
+  	?stadium wdt:P131 ?commune .
+	?commune wdt:P18 ?communeImage .
+  	SERVICE wikibase:label { bd:serviceParam wikibase:language "en". }
+    
+}
