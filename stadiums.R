@@ -40,10 +40,9 @@ viz <- ggplot(stadiums, aes(long, lat)) +
   geom_point(aes(text = stadiumLabel, size = capacity), colour = "#2299ff", alpha = 0.7)
 ggplotly(viz)
 
-map1 <- leaflet() %>%
-  addProviderTiles()
+leaflet(stadiums) %>%
   addTiles() %>% 
-  setView(lng = 2.360104, lat = 48.92444, zoom = 15) %>% 
-  addCircleMarkers(lng = 2.360104, lat = 48.92444, popup = "Stade de France", opacity = 0.7, weight = 0.5, radius = 200)
-map1
+  setView(lng = 2.360104, lat = 48.92444, zoom = 6) %>% 
+  addCircleMarkers(lat = ~lat, lng = ~long, radius = ~capacity/5000, popup = ~as.character(capacity), weight = 1)
+
 
