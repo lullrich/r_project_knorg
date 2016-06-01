@@ -100,12 +100,12 @@ df <- separate(df, date_of_birth_.age., c("date_of_birth", "age"), sep = " ") %>
   separate(senior_debut, c("debut_date", "debut_game"), sep = ": ") %>%
   separate(last_appearance, c("last_appearance_date", "last_appearance_game"), sep = ":")
 df$age <- extract_numeric(df$age)
-df$date_of_birth <- dmy(df$date_of_birth)
+dates <- select(df,contains("date")) %>% 
+  lapply(dmy)
+
 
 write.table(df,"data.csv", row.names = FALSE, sep = "|")
 df <- read.csv("data.csv", sep = "|", encoding = "UTF-8")
-dates <- select(df,contains("date"))
-lapply(dates, ymd)
 
 summary(df)
 p <- interval(df$date_of_birth, today()) %>% as.period(unit = "years")
